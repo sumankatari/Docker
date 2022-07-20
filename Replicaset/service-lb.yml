@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  labels:
+    job: lb
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app: nginxapp
+    version: "1.23.0"
+  type: LoadBalancer

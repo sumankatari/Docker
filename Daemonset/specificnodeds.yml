@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: specificnodesds
+  labels:
+    app: fluentd
+spec:
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    metadata:
+      labels:
+        app: fluentd
+        purpose: logcollection
+    spec:
+      containers:
+        - name: fluentd
+          image: fluentd:latest
+          ports:
+            - containerPort: 24224
+      nodeSelector:
+        name: app

@@ -1,0 +1,20 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata: 
+  name: oneshot-failure
+  labels:
+    type: oneshot-failure
+spec:
+  template:
+    metadata:
+      labels:
+        type: oneshot-failure
+    spec:
+      containers:
+        - name: job
+          image: alpine:latest
+          command:
+            - exit
+            - "1"
+      restartPolicy: OnFailure

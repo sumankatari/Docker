@@ -1,0 +1,22 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata: 
+  name: parallel-jobs
+  labels:
+    topic: parallel
+spec:
+  completions: 5
+  parallelism: 3
+  template:
+    metadata:
+      labels:
+        type: parallel
+    spec:
+      containers:
+        - name: job
+          image: alpine:latest
+          command:
+            - exit
+            - "1"
+      restartPolicy: OnFailure
